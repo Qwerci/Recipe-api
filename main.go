@@ -12,6 +12,7 @@ func main() {
 	router.GET("/recipes",controllers.ListRecipes)
 	router.PUT("/recipes/:id",controllers.UpdateRecipe)
 	router.DELETE("/recipes/:id",controllers.DeleteRecipe)
+	router.GET("/recipes/search",controllers.SearchRecipe)
 
 	router.Run(":5000")
 

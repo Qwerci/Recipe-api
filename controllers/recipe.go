@@ -8,6 +8,7 @@ import (
 	"github.com/Qwerci/Recipe-api/models"
 	"github.com/gin-gonic/gin"
 	"github.com/rs/xid"
+	"strings"
 )
 
 
@@ -98,3 +99,27 @@ func DeleteRecipe(c *gin.Context){
 	
 }
 
+
+
+func SearchRecipe(c *gin.Context) {
+
+	tag := c.Query("tag")
+	listofRecipes := make([]models.Recipe, 0)
+
+	for i := 0; i < len(recipes); i++ {
+		found := false
+
+		for _, t := range recipes[i].Tags {
+			if strings.EqualFold(t, tag){
+				found = true
+			}
+		}
+
+		if found{
+			listofRecipes = append(listofRecipes, recipes[i])
+
+		}
+	}
+
+	c.JSON(http.StatusOK, listofRecipes)
+}
