@@ -11,5 +11,5 @@ type Recipe struct {
 	Tags 		[]string `json:"tags"`
 	Ingredient 	[]string `json:"ingredient"`
 	Instruction []string `json:"instruction"`
-	PublishedAt time.Time `json:"published"`
+	PublishedAt time.Time `json:"publishedAt"`
 }
