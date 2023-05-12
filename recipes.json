@@ -1,0 +1,142 @@
+[
+    {   
+        "id": "ywja0lcmo4m9rg2klqo9",
+        "name": "Jollof Rice",
+        "tags": [
+          "West African",
+          "Main dish",
+          "Rice"
+        ],
+        "ingredient": [
+          "Rice",
+          "Tomato paste",
+          "Onion",
+          "Red bell pepper",
+          "Scotch bonnet pepper",
+          "Garlic",
+          "Thyme",
+          "Bay leaves",
+          "Curry powder",
+          "Smoked paprika",
+          "Salt",
+          "Water",
+          "Vegetable oil"
+        ],
+        "instruction": [
+          "Wash rice in cold water and drain.",
+          "Blend tomato paste, onion, red bell pepper, and scotch bonnet pepper to a smooth consistency.",
+          "Heat up vegetable oil in a large pot and add the blended mixture.",
+          "Add minced garlic, thyme, bay leaves, curry powder, smoked paprika, and salt to taste.",
+          "Cook on medium heat until the mixture thickens and the oil rises to the top.",
+          "Add the washed rice and water and stir well.",
+          "Reduce heat to low and let the rice cook for 20-25 minutes or until the rice is cooked through and the water is absorbed."
+        ],
+        "publishedAt": "2023-05-11T21:22:20.5976113Z"
+    },
+    {
+        "id": "ywja0legpox2vxklqo9",
+        "name": "Classic Margherita Pizza",
+        "tags": ["pizza", "italian", "vegetarian"],
+        "ingredient": [
+          "1 pound pizza dough",
+          "1/2 cup tomato sauce",
+          "8 ounces fresh mozzarella cheese",
+          "1/4 cup fresh basil leaves",
+          "2 tablespoons olive oil"
+        ],
+        "instruction": [
+          "Preheat the oven to 450°F.",
+          "Roll out the pizza dough into a 12-inch circle.",
+          "Spread the tomato sauce over the dough, leaving a 1-inch border around the edges.",
+          "Top the pizza with the mozzarella cheese.",
+          "Bake the pizza for 10-12 minutes, until the crust is golden brown and the cheese is melted and bubbly.",
+          "Remove the pizza from the oven and top with fresh basil leaves and a drizzle of olive oil.",
+          "Slice and serve hot."
+        ],
+        "publishedAt": "20230511T212220.597Z"
+    },
+    {
+        "id": "ywja0lfdpox2vxklqo9",
+        "name": "Chicken Parmesan",
+        "tags": ["italian", "chicken", "dinner"],
+        "ingredient": [
+          "4 boneless, skinless chicken breasts",
+          "1 cup all-purpose flour",
+          "2 eggs, beaten",
+          "2 cups seasoned breadcrumbs",
+          "1 cup tomato sauce",
+          "1 cup shredded mozzarella cheese",
+          "1/2 cup grated Parmesan cheese",
+          "2 tablespoons olive oil",
+          "Salt and pepper to taste"
+        ],
+        "instruction": [
+          "Preheat the oven to 375°F.",
+          "Season the chicken breasts with salt and pepper.",
+          "Coat the chicken breasts in flour, shaking off any excess.",
+          "Dip the chicken breasts in the beaten eggs, then coat them in the breadcrumbs.",
+          "Heat the olive oil in a large skillet over medium-high heat.",
+          "Add the chicken breasts to the skillet and cook for 3-4 minutes on each side, until golden brown.",
+          "Transfer the chicken breasts to a baking dish.",
+          "Top each chicken breast with tomato sauce, mozzarella cheese, and Parmesan cheese.",
+          "Bake the chicken for 20-25 minutes, until the cheese is melted and bubbly and the chicken is cooked through.",
+          "Remove from the oven and let the chicken rest for 5 minutes before serving."
+        ],
+        "publishedAt": "2023-05-11T21:22:20Z"
+    },
+    {
+        "id":"ywja0li1pox2vxklqo9",
+        "name": "Banana Bread",
+        "tags": ["baking", "breakfast", "dessert"],
+        "ingredient": [
+          "3 ripe bananas, mashed",
+          "1/3 cup melted butter",
+          "1 teaspoon baking soda",
+          "Pinch of salt",
+          "3/4 cup sugar",
+          "1 large egg, beaten",
+          "1 teaspoon vanilla extract",
+          "1 1/2 cups all-purpose flour"
+        ],
+        "instruction": [
+          "Preheat the oven to 350°F.",
+          "Combine the mashed bananas and melted butter in a large mixing bowl.",
+          "Add the baking soda, salt, and sugar, and mix well.",
+          "Stir in the beaten egg and vanilla extract.",
+          "Add the flour and mix until just combined.",
+          "Pour the batter into a greased loaf pan.",
+          "Bake the banana bread for 50-60 minutes, or until a toothpick inserted into the center of the bread comes out clean.",
+          "Remove the bread from the oven and let it cool in the pan for 10 minutes.",
+          "Remove the bread from the pan and transfer it to a wire rack to cool completely"
+        ],
+        "publishedAt": "2023-05-11T21:22:20.597Z"
+    },
+    {
+        "id": "ywja0lfto4m9rg2klqo9",
+        "name": "Chocolate Chip Cookies",
+        "tags": ["dessert", "baking", "chocolate"],
+        "ingredient": [
+          "2 1/4 cups all-purpose flour",
+          "1 tsp baking soda",
+          "1 tsp salt",
+          "1 cup unsalted butter, room temperature",
+          "3/4 cup white sugar",
+          "3/4 cup brown sugar",
+          "2 eggs",
+          "2 tsp vanilla extract",
+          "2 cups semisweet chocolate chips"
+        ],
+        "instruction": [
+          "Preheat the oven to 375°F (190°C).",
+          "In a medium bowl, combine the flour, baking soda, and salt. Set aside.",
+          "In a large mixing bowl, beat the butter, white sugar, and brown sugar together until creamy.",
+          "Beat in the eggs, one at a time, then stir in the vanilla extract.",
+          "Gradually add the flour mixture to the mixing bowl, stirring until just combined.",
+          "Stir in the chocolate chips.",
+          "Drop rounded tablespoons of dough onto ungreased baking sheets.",
+          "Bake for 8-10 minutes, or until lightly golden brown.",
+          "Let cool for 5 minutes on the baking sheets before transferring to wire racks to cool completely."
+        ],
+        "publishedAt": "2023-05-11T21:22:20.5976113Z"
+    }     
+]
