@@ -10,6 +10,7 @@ func main() {
 
 	router.POST("/recipes",controllers.NewRecipe)
 	router.GET("/recipes",controllers.ListRecipes)
+	router.PUT("/recipes/:id",controllers.UpdateRecipe)
 
 	router.Run(":5000")
 
