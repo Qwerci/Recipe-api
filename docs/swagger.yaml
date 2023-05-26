@@ -1,0 +1,108 @@
+basePath: /
+definitions:
+  models.Recipe:
+    properties:
+      id:
+        type: string
+      ingredient:
+        items:
+          type: string
+        type: array
+      instruction:
+        items:
+          type: string
+        type: array
+      name:
+        type: string
+      publishedAt:
+        type: string
+      tags:
+        items:
+          type: string
+        type: array
+    type: object
+host: localhost:5000
+info:
+  contact: {}
+  description: This is a sample recipes API implementation. It's a learning jounery
+    to understand
+  title: Tage Services API
+  version: 'Version: 1.0.0'
+paths:
+  /recipes:
+    get:
+      description: List all recipes
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Recipe listed successfully
+          schema:
+            $ref: '#/definitions/models.Recipe'
+      summary: List Recipe
+      tags:
+      - recipes
+    post:
+      description: Create new recipes and saves it to a json file
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Recipe created successfully
+          schema:
+            $ref: '#/definitions/models.Recipe'
+        "400":
+          description: Bad request
+          schema:
+            type: string
+      summary: Create Recipe
+      tags:
+      - recipes
+  /recipes/:id:
+    delete:
+      description: Delete an exiting recipe
+      parameters:
+      - description: delete recipe by id
+        in: path
+        name: recipeid
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Recipe deleted successfully
+          schema:
+            $ref: '#/definitions/models.Recipe'
+        "404":
+          description: Recipe not found
+          schema:
+            type: string
+      summary: Delete Recipe
+      tags:
+      - recipes
+    put:
+      description: Update an exiting recipe
+      parameters:
+      - description: update recipe by id
+        in: path
+        name: recipeid
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Recipe updated successfully
+          schema:
+            $ref: '#/definitions/models.Recipe'
+        "404":
+          description: Recipe not found
+          schema:
+            type: string
+      summary: Update Recipe
+      tags:
+      - recipes
+schemes:
+- http
+swagger: "2.0"
