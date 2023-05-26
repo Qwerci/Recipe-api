@@ -1,12 +1,28 @@
+// @title		Recipes API
+// @description	This is a sample recipes API implementation. It's a learning jounery to understand
+// the tools and packages in Go
+
+// @schemes http
+// @host localhost:5000
+// @BasePath	/
+// @version	Version: 1.0.0
+// 
+
 package main
 
 import (
+	_ "github.com/Qwerci/Recipe-api/docs"
 	"github.com/gin-gonic/gin"
 	"github.com/Qwerci/Recipe-api/controllers"
+	ginSwagger "github.com/swaggo/gin-swagger"
+	swaggerFiles "github.com/swaggo/files"
 )
 
+//  @title Tage Services API
 func main() {
 	router :=gin.Default()
+// add swagger
+	router.GET("/docs/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
 	router.POST("/recipes",controllers.NewRecipe)
 	router.GET("/recipes",controllers.ListRecipes)

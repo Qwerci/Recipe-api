@@ -21,6 +21,15 @@ func init() {
 	_ = json.Unmarshal([]byte(file), &recipes)
 }
 
+// CreateRecipe 	godoc
+// @Summary			Create Recipe
+// @description		Create new recipes and saves it to a json file
+// 
+// @Produce 		application/json
+// @tags			recipes
+// @Success			200 {object} models.Recipe "Recipe created successfully"
+// @Failure			400 {string} string "Bad request"
+// @Router          /recipes	[post]
 func NewRecipe(c *gin.Context){
 	var recipe models.Recipe
 
@@ -36,12 +45,27 @@ func NewRecipe(c *gin.Context){
 	c.JSON(http.StatusOK, recipe)
 
 }
-
-
+// ListRecipe 	godoc
+// @Summary			List Recipe
+// @description		List all recipes
+// 
+// @Produce 		application/json
+// @tags			recipes
+// @Success			200 {object} models.Recipe "Recipe listed successfully"
+// @Router          /recipes	[get]
 func ListRecipes(c *gin.Context){
 	c.JSON(http.StatusOK, recipes)
 }
 
+// UpdateRecipe 	godoc
+// @Summary			Update Recipe
+// @description		Update an exiting recipe
+// @Param			recipeid path string true "update recipe by id"
+// @Produce 		application/json
+// @tags			recipes
+// @Success			200 {object} models.Recipe "Recipe updated successfully"
+// @Failure			404 {string} string "Recipe not found"
+// @Router          /recipes/:id	[put]
 func UpdateRecipe(c *gin.Context){
 	id := c.Param("id")
 
@@ -74,7 +98,15 @@ func UpdateRecipe(c *gin.Context){
 
 }
 
-
+// UpdateRecipe 	godoc
+// @Summary			Delete Recipe
+// @description		Delete an exiting recipe
+// @Param			recipeid path string true "delete recipe by id"
+// @Produce 		application/json
+// @tags			recipes
+// @Success			200 {object} models.Recipe "Recipe deleted successfully"
+// @Failure			404 {string} string "Recipe not found"
+// @Router          /recipes/:id	[delete]
 func DeleteRecipe(c *gin.Context){
 	id := c.Param("id")
 	index := -1
