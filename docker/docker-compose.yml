@@ -1,0 +1,11 @@
+version: '1'
+service:
+  mongodb: 
+    image: mongo
+    container_name: recipedb
+    ports:
+      - 27017:27017
+    volumes:
+      - mongodb_data:/data/db
+volumes:
+  mongodb_data: 
