@@ -1,24 +1,43 @@
 package controllers
 
 import (
-	"os"
-	"net/http"
-	"time"
 	"encoding/json"
+	"log"
+	"net/http"
+	"os"
+	"strings"
+	"time"
+	"context"
+	"github.com/Qwerci/Recipe-api/db"
 	"github.com/Qwerci/Recipe-api/models"
 	"github.com/gin-gonic/gin"
 	"github.com/rs/xid"
-	"strings"
+	"go.mongodb.org/mongo-driver/mongo"
 )
 
 
 var recipes []models.Recipe
+var recipeCollection *mongo.Collection = db.OpenCollection(db.Client,"recipes")
 
 
 func init() {
+	
+
 	recipes = make([]models.Recipe, 0)
 	file, _ := os.ReadFile("recipes.json")
 	_ = json.Unmarshal([]byte(file), &recipes)
+
+	var listofRecipes []interface{}
+	for _, recipe := range recipes {
+		listofRecipes = append(listofRecipes, recipe)
+	}
+	ctx := context.Background()
+	insertManyResult, err := recipeCollection.InsertMany(ctx, listofRecipes)
+	if err != nil {
+		log.Fatal(err)
+	}
+	
+	log.Println("Inserted recipes: ", len(insertManyResult.InsertedIDs))
 }
 
 // CreateRecipe 	godoc

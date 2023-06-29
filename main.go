@@ -14,12 +14,14 @@ import (
 	_ "github.com/Qwerci/Recipe-api/docs"
 	"github.com/gin-gonic/gin"
 	"github.com/Qwerci/Recipe-api/controllers"
+	// "github.com/Qwerci/Recipe-api/db"
 	ginSwagger "github.com/swaggo/gin-swagger"
 	swaggerFiles "github.com/swaggo/files"
 )
 
-//  @title Tage Services API
+
 func main() {
+	
 	router :=gin.Default()
 // add swagger
 	router.GET("/docs/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
