@@ -7,7 +7,7 @@ import (
 	"os"
 	"strings"
 	"time"
-
+	"context"
 	"github.com/Qwerci/Recipe-api/db"
 	"github.com/Qwerci/Recipe-api/models"
 	"github.com/gin-gonic/gin"
@@ -31,11 +31,13 @@ func init() {
 	for _, recipe := range recipes {
 		listofRecipes = append(listofRecipes, recipe)
 	}
-	
-	insertManyResult, err := db.OpenCollection(recipes).InsertMany(listofRecipes)
+	ctx := context.Background()
+	insertManyResult, err := recipeCollection.InsertMany(ctx, listofRecipes)
 	if err != nil {
 		log.Fatal(err)
 	}
+	
+	log.Println("Inserted recipes: ", len(insertManyResult.InsertedIDs))
 }
 
 // CreateRecipe 	godoc

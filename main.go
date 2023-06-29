@@ -14,7 +14,7 @@ import (
 	_ "github.com/Qwerci/Recipe-api/docs"
 	"github.com/gin-gonic/gin"
 	"github.com/Qwerci/Recipe-api/controllers"
-	"github.com/Qwerci/Recipe-api/db"
+	// "github.com/Qwerci/Recipe-api/db"
 	ginSwagger "github.com/swaggo/gin-swagger"
 	swaggerFiles "github.com/swaggo/files"
 )
