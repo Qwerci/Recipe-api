@@ -1,24 +1,27 @@
 package controllers
 
 import (
+	"context"
 	"encoding/json"
+	"fmt"
 	"log"
 	"net/http"
 	"os"
 	"strings"
 	"time"
-	"context"
+
 	"github.com/Qwerci/Recipe-api/db"
 	"github.com/Qwerci/Recipe-api/models"
 	"github.com/gin-gonic/gin"
-	"github.com/rs/xid"
+	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
 
 var recipes []models.Recipe
 var recipeCollection *mongo.Collection = db.OpenCollection(db.Client,"recipes")
-
+var ctx = context.Background()
 
 func init() {
 	
@@ -31,7 +34,7 @@ func init() {
 	for _, recipe := range recipes {
 		listofRecipes = append(listofRecipes, recipe)
 	}
-	ctx := context.Background()
+	
 	insertManyResult, err := recipeCollection.InsertMany(ctx, listofRecipes)
 	if err != nil {
 		log.Fatal(err)
@@ -58,9 +61,17 @@ func NewRecipe(c *gin.Context){
 		return 
 	}
 
-	recipe.ID = xid.New().String()
+	recipe.ID = primitive.NewObjectID()
 	recipe.PublishedAt = time.Now()
-	recipes = append(recipes, recipe)
+
+	var err error
+	_, err = recipeCollection.InsertOne(ctx, recipe)
+	if err != nil {
+		fmt.Println(err)
+		c.JSON(http.StatusInternalServerError,
+		gin.H{"error": "error creating recipe"})
+		return 
+	}
 	c.JSON(http.StatusOK, recipe)
 
 }
@@ -73,6 +84,21 @@ func NewRecipe(c *gin.Context){
 // @Success			200 {object} models.Recipe "Recipe listed successfully"
 // @Router          /recipes	[get]
 func ListRecipes(c *gin.Context){
+	
+	cur, err := recipeCollection.Find(ctx, bson.M{})
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, 
+		gin.H{"error": err.Error()})
+		return
+	}
+	defer cur.Close(ctx)
+
+	recipes := make([] models.Recipe, 0)
+	for cur.Next(ctx) {
+		var recipe models.Recipe
+		cur.Decode(&recipe)
+		recipes = append(recipes, recipe)
+	}
 	c.JSON(http.StatusOK, recipes)
 }
 
@@ -113,7 +139,7 @@ func UpdateRecipe(c *gin.Context){
 
 	recipes[index] = recipe
 
-	c.JSON(http.StatusOK, recipe)
+	c.JSON(http.StatusOK, gin.H{"message": "Recipe has been updated"})
 
 }
 
