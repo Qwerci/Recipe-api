@@ -22,6 +22,7 @@ import (
 var recipes []models.Recipe
 var recipeCollection *mongo.Collection = db.OpenCollection(db.Client,"recipes")
 var ctx = context.Background()
+var err error
 
 func init() {
 	
@@ -93,7 +94,7 @@ func ListRecipes(c *gin.Context){
 	}
 	defer cur.Close(ctx)
 
-	recipes := make([] models.Recipe, 0)
+	recipes := make([]models.Recipe, 0)
 	for cur.Next(ctx) {
 		var recipe models.Recipe
 		cur.Decode(&recipe)
@@ -122,22 +123,22 @@ func UpdateRecipe(c *gin.Context){
 		return
 	}
 
-	index := -1
+	objectId, _ := primitive.ObjectIDFromHex(id)
+	_, err = recipeCollection.UpdateOne(ctx, bson.M{
+		"_id": objectId,
+	},
+	bson.D{
+		{"name", recipe.Name},
+		{"instruction", recipe.Instruction},
+		{"ingredient", recipe.Ingredient},
+		{"tags", recipe.Tags},
+	})
 
-	for i := 0; i < len(recipes); i++ {
-		if recipes[i].ID == id {
-			index = i
-		}
-	}
-
-	if index == -1 {
-		c.JSON(http.StatusNotFound,gin.H{
-			"error": "Recipe not found",
-		})
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, 
+		gin.H{"error": err.Error()})
 		return
 	}
-
-	recipes[index] = recipe
 
 	c.JSON(http.StatusOK, gin.H{"message": "Recipe has been updated"})
 
