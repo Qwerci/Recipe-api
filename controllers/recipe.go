@@ -123,16 +123,27 @@ func UpdateRecipe(c *gin.Context){
 		return
 	}
 
-	objectId, _ := primitive.ObjectIDFromHex(id)
-	_, err = recipeCollection.UpdateOne(ctx, bson.M{
-		"_id": objectId,
-	},
-	bson.D{
-		{"name", recipe.Name},
-		{"instruction", recipe.Instruction},
-		{"ingredient", recipe.Ingredient},
-		{"tags", recipe.Tags},
+	objectId, err := primitive.ObjectIDFromHex(id)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"error": "Invalid recipe ID",
+		})
+		return
+	}
+
+	updateFields := bson.D{
+		{Key:"name", Value: recipe.Name},
+		{Key:"instruction", Value: recipe.Instructions},
+		{Key:"ingredient", Value: recipe.Ingredients},
+		{Key:"tags", Value: recipe.Tags},
+	}
+
+	_, err = recipeCollection.UpdateOne(ctx, 
+		bson.M{"_id": objectId},
+		bson.D{{Key:"$set", Value: updateFields},
 	})
+
+
 
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, 
@@ -141,7 +152,6 @@ func UpdateRecipe(c *gin.Context){
 	}
 
 	c.JSON(http.StatusOK, gin.H{"message": "Recipe has been updated"})
-
 }
 
 // UpdateRecipe 	godoc
@@ -157,9 +167,18 @@ func DeleteRecipe(c *gin.Context){
 	id := c.Param("id")
 	index := -1
 
+	objectID, err := primitive.ObjectIDFromHex(id)
+	if  err != nil {
+		c.JSON(http.StatusBadRequest, 
+		gin.H{
+			"error": "Invalid recipe ID",
+		})
+		return
+	}
+
 	for i := 0; i < len(recipes); i++{
-		if recipes[i].ID == id {
-			index =1
+		if recipes[i].ID == objectID {
+			index = i
 		}
 	}
 
@@ -178,23 +197,35 @@ func DeleteRecipe(c *gin.Context){
 }
 
 
-
+// SearchRecipe 	godoc
+// @Summary			Search Recipe by Tag
+// @description		Search for recipes based on a given tag
+// @Param			tag query string true "tag to search recipes by"
+// @Produce 		application/json
+// @tags			recipes
+// @Success			200 {object} []models.Recipe "Recipes found successfully"
+// @Router          /search-recipes	[get]
 func SearchRecipe(c *gin.Context) {
 
-	tag := c.Query("tag")
+	tag := c.Query("tag")// Get the "tag" query parameter
+
+	// Create a list to store matched recipes
 	listofRecipes := make([]models.Recipe, 0)
 
-	for i := 0; i < len(recipes); i++ {
+	// Iterate through each recipe to find matches
+	for _, recipe := range recipes {
 		found := false
 
-		for _, t := range recipes[i].Tags {
+	// Check if the provided tag matches any of the recipe's tags
+		for _, t := range recipe.Tags {
 			if strings.EqualFold(t, tag){
 				found = true
+				break		// Once a match is found, exit the inner loop
 			}
 		}
 
 		if found{
-			listofRecipes = append(listofRecipes, recipes[i])
+			listofRecipes = append(listofRecipes, recipe)
 
 		}
 	}
